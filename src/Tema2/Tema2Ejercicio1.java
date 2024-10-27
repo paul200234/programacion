@@ -3,7 +3,7 @@ package Tema2;
 import java.util.Scanner;
 
 public class Tema2Ejercicio1 {
-    public  static void main(String[] args){
+    public  static void main(){
         double ladoA;
         Scanner in =new Scanner(System.in);
         System.out.println("Introduce la longitud del lado");

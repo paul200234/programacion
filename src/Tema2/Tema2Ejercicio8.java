@@ -3,7 +3,7 @@ package Tema2;
 import java.util.Scanner;
 
 public class Tema2Ejercicio8 {
-    public static void main(String[] args){
+    public static void main(){
         Scanner in =new Scanner(System.in);
         System.out.println("Introduce el numero de dolares");
         double dolares = in.nextDouble();
