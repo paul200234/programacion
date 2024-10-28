@@ -13,20 +13,22 @@ public class Tema2Ejercicio17 {
         System.out.println("Introduce 2 para realizar un triangulo");
         int num = in.nextInt();
         switch (num){
-            case 0:
+            case 0 ->{
                 System.out.println("Has seleccionado cuadrado");
                 cuadrado.main();
-                return;
-            case 1:
+            }
+            case 1->{
                 System.out.println("Has seleccionado rectangulo");
                 rectangulo.main();
-                return;
-            case 2:
+            }
+            case 2 ->{
                 System.out.println("Has seleccionado trisngulo");
                 triangulo.main();
-                return;
-            default:
+            }
+            default->{
                 System.out.println("Ha habido un error");
+            }
+
         }
     }
 }
