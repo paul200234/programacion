@@ -1,6 +1,6 @@
-package Tema3;
+package Tema2.bucles;
 
-public class Tema3Ejercicio1 {
+public class Tema2Ejercicio19 {
     public static void main(String[] args){
         int i =0;
         while (i<=1000){
