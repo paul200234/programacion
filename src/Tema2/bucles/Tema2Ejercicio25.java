@@ -9,7 +9,7 @@ public class Tema2Ejercicio25 {
         int a = in.nextInt();
         int c;
         for(c=a-1;c>1;c--){
-        a=a*c;
+            a=a*c;
         }
         System.out.println("El factorial de su numero es: "+a);
     }
