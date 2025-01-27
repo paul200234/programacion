@@ -1,4 +1,4 @@
-package Tema4.Strings;
+package Tema3.modulo2.Strings;
 
 import java.util.Arrays;
 import java.util.Scanner;

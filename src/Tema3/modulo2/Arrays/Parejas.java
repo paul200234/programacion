@@ -1,4 +1,4 @@
-package Tema4.Arrays;
+package Tema3.modulo2.Arrays;
 
 import java.util.Arrays;
 import java.util.Random;
