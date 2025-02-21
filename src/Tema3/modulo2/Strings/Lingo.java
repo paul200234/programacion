@@ -36,9 +36,9 @@ public class Lingo {
             for (int j = 0; j < palabraSecreta.length; j++) {
                 if (intentoJugador.charAt(i) == palabraSecreta[j]) {
                     if (i == j) {
-                        palabraMostrada[j] = palabraSecreta[j];
+                        palabraMostrada[i] = palabraSecreta[i];
                     } else {
-                        palabraMostrada[j] = '*';
+                        palabraMostrada[i] = '*';
                     }
                 }
             }

@@ -76,12 +76,7 @@ public class MyString {
 
     public static int cuantasPalabra(String cadena) {
         String[] contador = cadena.split(" ");
-        int contador_palabras = 0;
-
-        for (int i = 0; i < contador.length; i++) {
-            contador_palabras++;
-        }
-        return contador_palabras;
+        return contador.length;
     }
 
     public static String numero(String telefono) {
