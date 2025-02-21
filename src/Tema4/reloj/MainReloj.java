@@ -39,6 +39,7 @@ public class MainReloj {
             Reloj reloj5 = new Reloj(12, 0, 0); // Mediodía
             reloj5.setPostMeridian(true);
             System.out.println("Reloj 5 (mediodía, formato 12h): " + reloj5);
+
         }
     }
 
