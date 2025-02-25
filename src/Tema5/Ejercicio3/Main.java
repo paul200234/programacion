@@ -55,7 +55,6 @@ public class Main {
                 case 4:
                     System.out.println("\n--- Mostrar la cola actual ---");
                     colaBanco.forEach(usuario -> System.out.println(usuario.getNombre()));
-                    System.out.println("Cola actual: [Mostrar lista de personas aquí]");
                     break;
 
                 case 5:
