@@ -52,6 +52,7 @@ public class Main {
                 listaDeLaCompra.add(producto);
             }
             else {
+
                 System.out.println(producto.name()+" ya existe en la lista.");
             }
 
