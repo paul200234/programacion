@@ -44,7 +44,7 @@ public class inventarioFunko {
                     case 5 -> mostrarMediaPrecios();
 
                     case 6 -> mostrarFunkosPorModelo();
-//                    case 7 -> mostrarFunkos2023();
+                    case 7 -> mostrarFunkos2023();
 
                     case 8 -> {
                         System.out.println("Saliendo...");
@@ -61,8 +61,17 @@ public class inventarioFunko {
 
     }
 
+    private static void mostrarFunkos2023() {
+        for (Funko funko : inventario) {
+            if (funko.getFechaLanzamiento().getYear() == 2023) System.out.println(funko);
+        }
+    }
+
     private static void mostrarFunkosPorModelo() {
-        inventario.sort();
+        Funko.Modelo modelo = solicitarModelo();
+        for (Funko funko : inventario) {
+            if (funko.getModelo().equals(modelo)) System.out.println(funko);
+        }
     }
 
     private static void mostrarMediaPrecios() {
