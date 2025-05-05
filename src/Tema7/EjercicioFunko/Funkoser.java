@@ -1,5 +1,6 @@
 package Tema7.EjercicioFunko;
 
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -9,13 +10,14 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
-public class inventarioFunko {
-    public static final String listaFunkosCSV = "Resources/funkos.csv";
+public class Funkoser {
+
+    public static final String rutaArchivo = "Resources/funko.ser";
     public static List<Funko> inventario = new ArrayList<>();
     public static Scanner in = new Scanner(System.in);
 
     public static void main(String[] args) throws IOException {
-        hacerInventario();
+        inventario =SerializaFunkos.deserializaListasdeFunkos(rutaArchivo);
 
         boolean salir = false;
         while (!salir) {
@@ -53,8 +55,8 @@ public class inventarioFunko {
                 System.out.println("Error: Debe ingresar un número válido.");
             }
         }
-        guardarInventario();
-        SerializaFunkos.serializaListaDeFunkos(inventario, "Resources/funko.ser");
+        SerializaFunkos.serializaListaDeFunkos(inventario, rutaArchivo);
+
     }
 
     private static void mostrarFunkos2023() {
@@ -86,16 +88,7 @@ public class inventarioFunko {
         System.out.println("El funko mas caro es: " + funkoMasCaro);
     }
 
-    public static void hacerInventario() throws IOException {
-        List<String> lineas = Files.readAllLines(Path.of(listaFunkosCSV));
-        for (String linea : lineas) {
-            if (linea.startsWith("COD")) {
-                System.out.println("Leyendo lista de Funkos");
-            } else {
-                inventario.add(new Funko(linea));
-            }
-        }
-    }
+
 
     public static void leerInventario() {
         for (Funko funko : inventario) {
@@ -168,15 +161,5 @@ public class inventarioFunko {
         in.nextLine();
     }
 
-    private static void guardarInventario(){
-        StringBuilder funkoAtexto= new StringBuilder("COD,NOMBRE,MODELO,PRECIO,FECHA_LANZAMIENTO\n");
-        for (Funko funko : inventario) {
-            funkoAtexto.append(funko.toCSV()).append("\n");
-        }
-        try {
-            Files.writeString(Path.of(listaFunkosCSV),funkoAtexto);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
+
 }

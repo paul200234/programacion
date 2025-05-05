@@ -1,9 +1,10 @@
 package Tema7.EjercicioFunko;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Funko {
+public class Funko implements Serializable {
     public enum Modelo {
         MARVEL,
         DISNEY,
