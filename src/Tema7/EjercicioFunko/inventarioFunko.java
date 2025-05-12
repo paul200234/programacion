@@ -168,13 +168,13 @@ public class inventarioFunko {
         in.nextLine();
     }
 
-    private static void guardarInventario(){
-        StringBuilder funkoAtexto= new StringBuilder("COD,NOMBRE,MODELO,PRECIO,FECHA_LANZAMIENTO\n");
+    private static void guardarInventario() {
+        StringBuilder funkoAtexto = new StringBuilder("COD,NOMBRE,MODELO,PRECIO,FECHA_LANZAMIENTO\n");
         for (Funko funko : inventario) {
             funkoAtexto.append(funko.toCSV()).append("\n");
         }
         try {
-            Files.writeString(Path.of(listaFunkosCSV),funkoAtexto);
+            Files.writeString(Path.of(listaFunkosCSV), funkoAtexto);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
