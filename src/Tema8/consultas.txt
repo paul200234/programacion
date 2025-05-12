@@ -1,0 +1,324 @@
+# Ejercicios de Repaso SQL - Base de Datos Hogwarts
+
+## Ejercicio 1: Consulta básica con SELECT
+Selecciona los nombres y apellidos de todos los profesores.
+
+hogwarts=> SELECT nombre, apellido
+FROM Profesor;
+  nombre   |  apellido
+-----------+------------
+ Minerva   | McGonagall
+ Severus   | Snape
+ Filius    | Flitwick
+ Remus     | Lupin
+ Pomona    | Sprout
+ Cuthbert  | Binns
+ Aurora    | Sinistra
+ Sybill    | Trelawney
+ Rubeus    | Hagrid
+ Charity   | Burbage
+ Septima   | Vector
+ Bathsheda | Babbling
+ Horace    | Slughorn
+ Alastor   | Moody
+ Rolanda   | Hooch
+ Firenze   | Centauro
+(16 rows)
+
+## Ejercicio 2: Filtrado de datos con WHERE
+Selecciona los nombres y apellidos de los estudiantes nacidos después del 1 de enero de 1980.
+
+hogwarts=> SELECT nombre, apellido
+FROM Estudiante
+WHERE fecha_nacimiento > '1980-01-01';
+  nombre   |    apellido
+-----------+-----------------
+ Harry     | Potter
+ Ron       | Weasley
+ Draco     | Malfoy
+ Neville   | Longbottom
+ Luna      | Lovegood
+ Ginny     | Weasley
+ Seamus    | Finnigan
+ Dean      | Thomas
+ Lavender  | Brown
+ Parvati   | Patil
+ Padma     | Patil
+ Hannah    | Abbott
+ Ernie     | Macmillan
+ Justin    | Finch-Fletchley
+ Susan     | Bones
+ Zacharias | Smith
+ Terry     | Boot
+ Michael   | Corner
+ Anthony   | Goldstein
+ Theodore  | Nott
+ Gregory   | Goyle
+ Romilda   | Vane
+ Colin     | Creevey
+ Dennis    | Creevey
+ Stewart   | Ackerley
+ Orla      | Quirke
+ Eleanor   | Branstone
+ Owen      | Cauldwell
+ Laura     | Madley
+ Kevin     | Whitby
+ Graham    | Pritchard
+ Malcolm   | Baddock
+ Astoria   | Greengrass
+ Daphne    | Greengrass
+ Morag     | MacDougal
+ Lisa      | Turpin
+ Mandy     | Brocklehurst
+(37 rows)
+
+## Ejercicio 3: Ordenación de resultados con ORDER BY
+Muestra los nombres y apellidos de los estudiantes, ordenados por su fecha de nacimiento de forma ascendente.
+
+SELECT nombre, apellido 
+FROM Estudiante 
+ORDER BY fecha_nacimiento ASC;
+
+## Ejercicio 4: Agrupación de resultados con GROUP BY
+Muestra cuántos estudiantes hay en cada casa, mostrando el nombre de la casa y el número de estudiantes.
+
+hogwarts=> SELECT c.nombre, COUNT(e.id_estudiante) AS num_estudiantes
+FROM Casa c
+JOIN Estudiante e ON c.id_casa = e.id_casa
+GROUP BY c.nombre;
+   nombre   | num_estudiantes
+------------+-----------------
+ Ravenclaw  |              14
+ Slytherin  |              14
+ Hufflepuff |              10
+ Gryffindor |              21
+(4 rows)
+
+## Ejercicio 5: Uso de funciones de agregación
+Calcula la calificación media y la calificación máxima en la asignatura "Pociones".
+
+hogwarts=> SELECT AVG(ea.calificacion) AS media, MAX(ea.calificacion) AS maxima
+FROM Estudiante_Asignatura ea
+JOIN Asignatura a ON ea.id_asignatura = a.id_asignatura
+WHERE a.nombre = 'Pociones';
+       media        | maxima
+--------------------+--------
+ 8.1083333333333333 |    9.8
+(1 row)
+
+hogwarts=>
+
+## Ejercicio 6: Eliminar duplicados con DISTINCT
+Muestra todos los años de curso sin duplicados.
+
+hogwarts=> SELECT DISTINCT anyo_curso
+FROM Estudiante;
+ anyo_curso
+------------
+          4
+          6
+          7
+          1
+          3
+          5
+(6 rows)
+
+## Ejercicio 7: Filtrado de patrones con LIKE
+Selecciona los nombres de los estudiantes cuyo apellido empieza con la letra "P".
+
+hogwarts=> SELECT nombre
+FROM Estudiante
+WHERE apellido LIKE 'P%';
+ nombre
+---------
+ Harry
+ Parvati
+ Padma
+ Pansy
+ Adrian
+ Graham
+(6 rows)
+
+## Ejercicio 8: Uso de IN para búsqueda múltiple
+Muestra los nombres y apellidos de los estudiantes que están en su 4º o 5º año.
+
+hogwarts=> SELECT nombre, apellido
+FROM Estudiante
+WHERE anyo_curso IN (4, 5);
+  nombre   |    apellido
+-----------+-----------------
+ Harry     | Potter
+ Hermione  | Granger
+ Ron       | Weasley
+ Draco     | Malfoy
+ Neville   | Longbottom
+ Luna      | Lovegood
+ Ginny     | Weasley
+ Seamus    | Finnigan
+ Dean      | Thomas
+ Lavender  | Brown
+ Parvati   | Patil
+ Padma     | Patil
+ Hannah    | Abbott
+ Ernie     | Macmillan
+ Justin    | Finch-Fletchley
+ Susan     | Bones
+ Zacharias | Smith
+ Terry     | Boot
+ Michael   | Corner
+ Anthony   | Goldstein
+ Pansy     | Parkinson
+ Blaise    | Zabini
+ Theodore  | Nott
+ Millicent | Bulstrode
+ Vincent   | Crabbe
+ Gregory   | Goyle
+ Romilda   | Vane
+ Daphne    | Greengrass
+ Morag     | MacDougal
+ Lisa      | Turpin
+ Mandy     | Brocklehurst
+
+## Ejercicio 9: Uso de operadores lógicos (AND, OR)
+Selecciona los nombres y apellidos de los estudiantes que están en el 5º año y pertenecen a las casas Gryffindor o Slytherin.
+
+hogwarts=> SELECT e.nombre, e.apellido
+FROM Estudiante e
+JOIN Casa c ON e.id_casa = c.id_casa
+WHERE e.anyo_curso = 5
+AND (c.nombre = 'Gryffindor' OR c.nombre = 'Slytherin');
+  nombre   |  apellido
+-----------+------------
+ Harry     | Potter
+ Hermione  | Granger
+ Ron       | Weasley
+ Draco     | Malfoy
+ Neville   | Longbottom
+ Seamus    | Finnigan
+ Dean      | Thomas
+ Lavender  | Brown
+ Parvati   | Patil
+ Pansy     | Parkinson
+ Blaise    | Zabini
+ Theodore  | Nott
+ Millicent | Bulstrode
+ Vincent   | Crabbe
+ Gregory   | Goyle
+ Daphne    | Greengrass
+(16 rows)
+
+## Ejercicio 10: Limitar resultados con LIMIT
+Muestra los primeros 5 estudiantes ordenados por su fecha de nacimiento.
+
+hogwarts=> SELECT nombre, apellido
+FROM Estudiante
+ORDER BY fecha_nacimiento
+LIMIT 5;
+  nombre  |  apellido
+----------+------------
+ Marcus   | Flint
+ Oliver   | Wood
+ Penelope | Clearwater
+ Percy    | Weasley
+ Eddie    | Carmichael
+(5 rows)
+
+## Ejercicio 11: Uso de operadores de comparación
+Muestra los nombres de los estudiantes cuya calificación en la asignatura de "Vuelo" es mayor o igual a 8.
+
+hogwarts=> SELECT e.nombre
+FROM Estudiante e
+JOIN Estudiante_Asignatura ea ON e.id_estudiante = ea.id_estudiante
+JOIN Asignatura a ON ea.id_asignatura = a.id_asignatura
+WHERE a.nombre = 'Vuelo' AND ea.calificacion >= 8;
+  nombre
+-----------
+ Draco
+ Justin
+ Zacharias
+ Pansy
+ Theodore
+ Angelina
+ Laura
+ Kevin
+(8 rows)
+
+
+## Ejercicio 12: Inserción de datos con INSERT INTO
+Inserta un nuevo estudiante llamado "Nymphadora Tonks" en la casa Slytherin (id_casa = 4), en el 7º año, con fecha de nacimiento '1973-11-25'.
+
+hogwarts=> INSERT INTO Estudiante (nombre, apellido, id_casa, anyo_curso, fecha_nacimiento)
+VALUES ('Nymphadora', 'Tonks', 4, 7, '1973-11-25');
+INSERT 0 1
+
+## Ejercicio 13: Modificación de datos con UPDATE
+Cambia el jefe de la casa Hufflepuff a Pomona Sprout.
+
+hogwarts=> UPDATE Casa
+SET id_jefe = (SELECT id_profesor FROM Profesor WHERE nombre = 'Pomona' AND apellido = 'Sprout')
+WHERE nombre = 'Hufflepuff';
+UPDATE 1
+
+## Ejercicio 14: Eliminación de datos con DELETE
+Elimina al estudiante con nombre "Tom Riddle".
+
+DELETE FROM Estudiante 
+WHERE nombre = 'Tom' AND apellido = 'Riddle';
+
+## Ejercicio 15: Uso de JOIN para combinar tablas
+Selecciona los nombres y apellidos de los estudiantes junto con el nombre de su casa.
+
+hogwarts=> SELECT e.nombre, e.apellido, c.nombre
+FROM Estudiante e
+JOIN Casa c ON e.id_casa = c.id_casa;
+
+## Ejercicio 16: Uso de LEFT JOIN para combinar tablas
+Muestra los nombres de los estudiantes junto con los nombres de las mascotas y las asignaturas que cursan. Incluye a los estudiantes que no tienen mascota.
+
+hogwarts=> SELECT e.nombre AS estudiante, m.nombre, a.nombre
+FROM Estudiante e
+LEFT JOIN Mascota m ON e.id_estudiante = m.id_estudiante
+LEFT JOIN Estudiante_Asignatura ea ON e.id_estudiante = ea.id_estudiante
+LEFT JOIN Asignatura a ON ea.id_asignatura = a.id_asignatura;
+
+## Ejercicio 17: Uso de subconsultas
+Muestra los nombres de los estudiantes que tienen una calificación superior al promedio en la asignatura "Encantamientos".
+
+hogwarts=> SELECT e.nombre
+FROM Estudiante e
+JOIN Estudiante_Asignatura ea ON e.id_estudiante = ea.id_estudiante
+JOIN Asignatura a ON ea.id_asignatura = a.id_asignatura
+WHERE a.nombre = 'Encantamientos'
+AND ea.calificacion > (
+    SELECT AVG(calificacion)
+    FROM Estudiante_Asignatura
+    JOIN Asignatura ON Estudiante_Asignatura.id_asignatura = Asignatura.id_a
+signatura
+    WHERE Asignatura.nombre = 'Encantamientos'
+);
+ nombre
+--------
+ Fred
+ Ernie
+ Susan
+ Oliver
+(4 rows)
+
+hogwarts=>
+
+## Ejercicio 18: Uso de HAVING
+Muestra los nombres de las casas que tienen un número promedio de calificaciones superior a 7 en las asignaturas de los estudiantes de esa casa.
+
+hogwarts=> SELECT c.nombre
+FROM Casa c
+JOIN Estudiante e ON c.id_casa = e.id_casa
+JOIN Estudiante_Asignatura ea ON e.id_estudiante = ea.id_estudiante
+GROUP BY c.nombre
+HAVING AVG(ea.calificacion) > 7;
+   nombre
+------------
+ Slytherin
+ Hufflepuff
+ Gryffindor
+ Ravenclaw
+(4 rows)

@@ -17,7 +17,7 @@ public class Funkoser {
     public static Scanner in = new Scanner(System.in);
 
     public static void main(String[] args) throws IOException {
-        inventario =SerializaFunkos.deserializaListasdeFunkos(rutaArchivo);
+        inventario = SerializaFunkos.deserializaListasdeFunkos(rutaArchivo);
 
         boolean salir = false;
         while (!salir) {
@@ -87,7 +87,6 @@ public class Funkoser {
         Funko funkoMasCaro = inventario.stream().max(Comparator.comparingDouble(Funko::getPrecio)).orElse(null);
         System.out.println("El funko mas caro es: " + funkoMasCaro);
     }
-
 
 
     public static void leerInventario() {
